@@ -9,7 +9,7 @@
 (function($) {
 
   $.fn.aga = function(method) {
-		
+
     var FN = function() {},
         POINTER = 'aga-pointer',
         SETTINGS = 'aga-settings',
@@ -65,7 +65,7 @@
         after: FN
       }
     },
-		
+
     pointer = settings.start,
     timeout,
 
@@ -74,7 +74,7 @@
       _getItems: function() {
         return $(this).children(settings.items);
       },
-			
+
       _getSize: function(items, pos, size) {
 
         switch (settings.orientation) {
@@ -88,7 +88,7 @@
           break;
 
         }
-				
+
       },
 
       _getAnimationProperties: function(key, value) {
@@ -118,13 +118,13 @@
               'left':value
             };
           break;
-					
+
           case HORIZONTAL:
             return {
               'width':value
             };
           break;
-					
+
           case VERTICAL:
             return {
               'height':value
@@ -166,29 +166,29 @@
             handler;
 
         for (var i = 0; i < items.length; i++) {
-					
+
           (function(i) {
-						
+
             handler = (typeof settings.handler == FUNCTION) ? settings.handler(items[i]) : null;
-						
+
             $(items[i]).addClass(CLASS[settings.orientation][1]);
-						
+
             if (handler) {
-						
+
               switch (settings.action) {
-		
+
                 case CLICK:
-		
+
                   handler.bind(CLICK, function() {
-					
+
                     pointer = $(obj).data(POINTER);
-										
+
                     (i == pointer && !settings.stayOpen) ? methods.close.apply(obj , [i, false]) : methods.open.apply(obj, [i, false]);
-										
+
                   });
-		
+
                 break;
-		
+
                 case HOVER:
 
                   $(obj).hover(function() {}, function() {
@@ -202,32 +202,32 @@
                     }, settings.hoverTime);
 
                   });
-									
+
                   handler.hover(function() {
-					
+
                     clearTimeout(timeout);
-										
+
                     timeout = setTimeout(function() {
 
                       methods.open.apply(obj, [i, false]);
                     }, settings.hoverTime);
-										
+
                   });
-		
+
                 break;
-		
+
               }
-						
+
             }
-						
+
           })(i);
-					
+
         }
-				
+
         (settings.start == null) ?  methods.close.apply(this, [null, true]) : methods.open.apply(this, [settings.start, true])
 
       },
-			
+
       close: function(pos, fast) {
 
         $(this).data(POINTER, null);
@@ -241,7 +241,7 @@
         if (!settings.forceSize) {
           $(this).animate(properties, time, settings.easing[1]);
         }
-				
+
         settings.close.before(items, pos);
 
         var width = (settings.forceSize) ? $(this).width()/items.length : settings.size.min;
@@ -262,11 +262,11 @@
           };
 
           fn(i);
-					
+
           $(items[i]).removeClass(CLASS[settings.orientation][2]);
-					
+
         }
-				
+
         settings.close.after(items, pos);
 
       },
@@ -310,9 +310,9 @@
         if (!settings.forceSize) {
           $(this).animate(properties, time, settings.easing[0]);
         }
-				
+
         settings.open.before(items, pos);
-				
+
         for (var i = 0; i < items.length; i++) {
 
           value = (i <= pos) ? (i*settings.size.min) : ((i-1)*settings.size.min)+itemSize,
@@ -329,54 +329,54 @@
           };
 
           fn(i);
-					
+
           (i == pos) ? $(items[i]).addClass(CLASS[settings.orientation][2]) : null;
-					
+
         }
 
         settings.open.after(items, pos);
 
       },
-			
+
       destroy: function() {
 
         var items = methods._getItems.apply(this),
             handler;
 
         $(this).removeClass(CLASS[settings.orientation][0]);
-				
+
         for (var i = 0; i < items.length; i++) {
-					
+
           (function(i) {
-						
+
             handler = (typeof settings.handler == FUNCTION) ? settings.handler(items[i]) : null;
-						
+
             $(items[i]).removeClass(CLASS[settings.orientation][0]+' '+CLASS[settings.orientation][1]);
-						
+
             if (handler) {
-						
+
               switch (settings.action) {
-		
+
                 case CLICK:
                   handler.unbind(CLICK);
                 break;
-		
+
                 case HOVER:
 
                   $(this).unbind(MOUSEENTER+' '+MOUSELEAVE);
-									
+
                   handler.unbind(MOUSEENTER);
-		
+
                 break;
-		
+
               }
-						
+
             }
-						
+
           })(i);
-					
+
         }
-				
+
       }
 
     };
