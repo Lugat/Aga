@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+	
+        <meta charset="utf-8" />
+
+        <title>Aga 1.07 - Beispiel: Menu</title>
+        
+        <link rel="stylesheet" type="text/css" media="screen" href="css/aga-1.07.css" />
+
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+        <script type="text/javascript" src="js/aga-1.07.js"></script>
+
+        <script>
+
+            $(function() {
+              $('ul').aga({
+                start: null,
+                forceSize: true,
+                size: {
+                  min: 80
+                },
+                stayOpen: false,
+                open: {
+                  durring: function(items, i, pos) {
+                    if (i == pos) {
+                      $(items[pos]).find('div').animate({
+                        width: 200
+                      }).find('h3').animate({
+                        'font-size': '1.6em'
+                      });
+                    } else {
+                      $(items[i]).find('div').animate({
+                        width: 80
+                      }).find('h3').animate({
+                        'font-size': '1.0em'
+                      });
+                    }
+                  }
+                },
+                close: {
+                  durring: function(items, i, pos) {
+                    $(items[i]).find('div').animate({
+                      width: 160
+                    }).find('h3').animate({
+                      'font-size': '1.0em'
+                    });
+                  }
+                }
+              });
+            });
+
+        </script>
+		
+        <style>
+
+            body {
+                margin:0;
+                padding:0;
+                font-family:Verdana, sans-serif;
+            }
+
+            ul {
+                width:640px;
+                height:334px;
+            }
+
+            ul li {
+                width:500px;
+                height:334px;
+                background:#fff;
+            }
+
+            ul div {
+              position:relative;
+              width:160px;
+              height:100%;
+              float:left;
+            }
+
+            ul div h3 {
+              line-height:50px;
+              position:relative;
+              text-align:center;
+              color:#fff;
+              font-size:1.0em;
+              font-weight:normal;
+              font-family:"Georgia";
+              font-style:italic;
+              text-shadow:0 1px 2px rgba(0, 0, 0, 0.6);
+            }
+            
+            ul p {
+              position:relative;
+              float:left;
+              width:160px;
+              font-size:0.6em;
+              text-align:justify;
+              padding:50px 20px !important;
+            }
+
+        </style>
+	
+    </head>
+	
+    <body>
+        
+        <ul>
+
+            <li>
+                <div style="background:url(http://farm5.static.flickr.com/4088/5022646362_4ce0e47c0a.jpg) center center;">
+                  <h3>Menu 1</h3>
+                </div>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
+            </li>
+
+            <li>
+                <div style="background:url(http://farm5.static.flickr.com/4153/5017235312_13ba30557e.jpg) center center;">
+                  <h3>Menu 2</h3>
+                </div>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
+            </li>
+
+            <li>
+                <div style="background:url(http://farm5.static.flickr.com/4138/4943039424_9f7c8680c8.jpg) center center;">
+                  <h3>Menu 3</h3>
+                </div>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
+            </li>
+
+            <li>
+                <div style="background:url(http://farm5.static.flickr.com/4144/4847782802_7967c4075b.jpg) center center;">
+                  <h3>Menu 4</h3>
+                </div>
+                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
+            </li>
+
+        </ul>
+
+    </body>
+
+</html>
